@@ -34,9 +34,8 @@ jobs:
         run: npm run build
         working-directory: client
         env:
-          # Point the frontend at your deployed Render backend.
-          # Set RENDER_BACKEND_URL as a GitHub repository secret.
-          VITE_API_URL: ${{ secrets.RENDER_BACKEND_URL }}
+          # Use a default API URL for GitHub Pages deployment
+          VITE_API_URL: https://your-api-url.com/api
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
