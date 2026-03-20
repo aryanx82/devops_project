@@ -1,0 +1,25 @@
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "HR"
+        required: true
+        type: string
+      age:
+        description: "20"
+        required: true
+        type: number
+      city:
+        description: "India"
+        required: true
+        type: string
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello World
+        run: |
+          echo "Hello World"
+          echo "Name: ${{ github.event.inputs.name }}"
+          echo "Age: ${{ github.event.inputs.age }}"
+          echo "City: ${{ github.event.inputs.city }}"

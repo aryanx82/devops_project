@@ -1,0 +1,46 @@
+name: Frontend Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  frontend-tests:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./client
+
+    steps:
+      # Setup 
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+
+      # Install 
+      - name: Install Dependencies
+        run: npm ci
+
+      # Code Quality 
+      - name: Lint
+        run: npm run lint
+
+      # Unit & Integration Tests (Vitest) 
+      - name: Run Tests (Vitest)
+        run: npm run test -- --run
+
+      # Build 
+      - name: Build
+        run: npm run build
