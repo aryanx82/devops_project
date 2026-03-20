@@ -1,0 +1,12 @@
+{
+  "name": "shopsmart",
+  "version": "1.0.0",
+  "description": "ShopSmart – root workspace for E2E tests",
+  "private": true,
+  "scripts": {
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.43.0"
+  }
+}
