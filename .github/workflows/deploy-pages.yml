@@ -5,17 +5,16 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+# Temporarily disable this workflow until GitHub Pages is properly configured
+# To enable:
+# 1. Go to repository Settings > Pages
+# 2. Enable GitHub Pages
+# 3. Select source as "GitHub Actions"
+# 4. Remove this comment block
 
 jobs:
   build:
+    if: false # Temporarily disabled
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,8 +33,10 @@ jobs:
         run: npm run build
         working-directory: client
         env:
-          # Use a default API URL for GitHub Pages deployment
-          VITE_API_URL: https://your-api-url.com/api
+          VITE_API_URL: https://api.example.com/api
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -43,12 +44,11 @@ jobs:
           path: client/dist
 
   deploy:
+    if: false # Temporarily disabled
     needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
